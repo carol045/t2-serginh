@@ -7,29 +7,44 @@
 #define KBD_AXI_STREADY			(1 << 0)
 #define KBD_AXI_STVALID			(1 << 1)
 
-uint8_t get_key(){
-	uint8_t data;
+uint8_t read_keyboard(){
 	while (!(KBD_AXI_STATUS & KBD_AXI_STVALID));
-	data = KBD_AXI_DATA;
-	
-	return data;
+	return KBD_AXI_DATA;
 }
 
-char return_key()[
-	char c;
-	uint8_t valor; //Endereco na LUT?
-	valor = get_key();
+char return_key(){
+	uint8_t tecla;
+	uint8_t c;
 
-	switch (valor){
+	while(1){
+		tecla = read_keyboard();
+
+		if((tecla & 0xF0) == 0xF0){
+			tecla = read_keyboard();
+			break;
+		}
+	}
+
+	switch (tecla){
 		case 0x1C:
 			c = 'A';
 		break;
-	
+		case 0x21:
+			c = 'C';
+			break;
+		case 0x44:
+			c = 'O';
+			break;
+		case 0x4B:
+			c = 'L';
+			break;
+		case 0x2D:
+			c = 'R';
+			break;
 	default:
-		c = ' ';
+		c = 0;
 		break;
 	}
-	
 
 	return c;
 }
@@ -40,8 +55,8 @@ int main(void){
 	printf("=====================\n\n");
 	
 	while (1) {
-		printf("%c", return_key());
-		delay_ms(1000);		
+		uint8_t letra = return_key();
+		printf("%c", letra);
 	}
 
 	return 0;
