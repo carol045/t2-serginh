@@ -1,0 +1,12 @@
+    hf-risc/riscv/core_rv32e/*
+    hf-risc/riscv/platform/rams/boot_ram_50mhz.vhd
+    hf-risc/riscv/platform/rams/ram.vhd
+    hf-risc/devices/peripherals/basic_soc.vhd
+    hf-risc/devices/controllers/uart/uart.vhd
+    hf-risc/riscv/platform/artix_nexysA7/artix7_nexysa7_basic_soc_ps2_kbd.xdc
+
+    if_axis.vhd
+    kbd_axis.vhd
+    debounce.vhd
+    ps2_keyboard.vhd
+    artix7_nexysa7_basic_soc_ps2_kbd.vhd (top level)
